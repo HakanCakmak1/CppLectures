@@ -1,0 +1,115 @@
+﻿Three-way Comparision
+
+Ders 20: Operator Overloading
+
+Overloading of comparasion operators: (C++20'da yeni bir operator eklendi (Three-way Comparision) dersin daha sonrasında anlatılacak)
+
+	Equality Operators: == !=
+	Relational Operators: < <= > >=
+
+	Mantıklı olan geri dönüş değerinin bool olması
+
+	friend bool operator==(const MyInt& lhs, const MyInt& rhs);
+	bool operator!=(const MyInt& lhs, const MyInt& rhs);
+
+	Bazı stl kütüphanelerini kullanmak için < ile == operatorönün olması gerekiyor. O yüzden overload etmek iyi bir seçenek.
+
+	a < b = a < b
+	a <= b = !(b < a)
+	a > b = b < a
+	a >= b = !(a < b )
+
+	friend bool operator<(const MyInt& lhs, const MyInt& rhs);
+	bool operator>(const MyInt& lhs, const MyInt& rhs);
+	bool operator<=(const MyInt& lhs, const MyInt& rhs);
+	bool operator>=(const MyInt& lhs, const MyInt& rhs);
+
+Overloading of Arithmetic Operators:
+
+	+ += - -= * *= / /=
+
+	Scott Meyers'e göre önce +='i tanımlamak daha mantıklıymış
+
+	MyInt& MyInt::operator+=(const MyInt& other)
+	{
+		mx += other.mx;
+		return *this;
+	}
+
+	MyInt operator+(const MyInt& lhs, const MyInt& rhs)
+	{
+		return MyInt{ lhs } += rhs;
+	}
+
+Overloading of Increment and Decrement Operators:
+
+	++x prefix increment
+	x++ postfix increment
+
+	--x prefix decrement
+	x-- postfix decrement
+
+	operator++() prefix
+	operator++(int) postfix
+
+	MyInt& MyInt::operator++()
+	{
+		++mx;
+		return *this;
+	}
+
+	MyInt MyInt::operator++(int)
+	{
+		MyInt temp{ *this };
+		++*this;
+		return temp;
+	}
+
+	[[nodiscard]] (Attribute)
+	Pure Function: Inputların ya da classın stateinde değişiklik yapmayan fonksiyonlar
+	Bu tarz fonksiyonlarda başına [[nodiscard]] yazmak mantıklı
+	[[nodiscard]] MyInt operator+(const MyInt& lhs, const MyInt& rhs);
+
+Overloading of Subscript Operator: []
+
+	Array-like, pointer-like classlar için overload edilmesi mantıklı
+
+	Array-like: Standart kütüphanede vector, array, dequeue, string
+	Pointer-like: Iterator
+	Map
+
+	Bir vector için operator[] kodu şöyle olabilir
+	int& operator[](std::size_t idx)
+	{
+		return _ar[idx];
+	}
+	const int& operator[](std::size_t) const
+	{
+		return _ar[idx];
+	}
+
+Overloading of Unary Arithmetic Operators: + -
+
+	MyInt MyInt::operator+() const
+	{
+		return *this;
+	}
+
+	MyInt MyInt::operator-() const
+	{
+		return MyInt{-mx};
+	}
+
+Overloading of Deferencing and Member Selection Operators:
+
+	-> operatorü binary olmasına rağmen unary operatör olarak overload ediliyor.
+
+	MyClass& operator*()
+	{
+		return *ptr;
+	}
+
+	MyClass* operator->()
+	{
+		return ptr;
+	}
