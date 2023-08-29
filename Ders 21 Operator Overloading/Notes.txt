@@ -1,0 +1,72 @@
+﻿Ders 21: Operator Overloading
+
+	UniquePtr implementasyonu
+
+	Stl kütüphanesinde Operator* ve operator-> smart-pointers, iterator
+
+Function Call Operator:
+	
+	C'de bir fonksiyon çağrılıyorsa 3 ihtimal olabilir.
+	1) Function: void func(); func();
+	2) Function pointer: void (*fptr) (); fptr();
+	3) Function-like macro: #define square(a) (a * a); 
+
+	C++'da ise ekstradan pek çok şey olabilir.
+	Böyle varlıklara callable denir.
+
+	Function call operatorü sadece member function olabilir.
+	Bu operatörü overload eden classlara functor class ya da function object denir
+
+	Random implementasyonu
+
+	void operator()(int);
+	void operator()(double);
+	void operator()(int, int);
+
+	Neden operator() overload edeyim. 
+	Daha çok generic programlama kısmında işe yarayacak.
+	Yine de bir sınıfın veri elemanlarını kullanabilir ve bu elemanlar constructor tarafından initialize edileceği için güzel.
+	Abstraction için de gayet güzel.
+
+	Random sınıfı türü tipik bir örneği
+
+Type-cast Operator Functions:
+
+	Hangi türe dönüşüyorsa operator ismi o oluyor.
+	operator int() const;
+
+	MyInt implementasyonu
+
+	Geri dönüş değeri yazılmıyor çünkü ismin bir parçası.
+
+	Tür dönüştürme fonksiyonları genelde const fonksiyon olur.
+
+	Tür dönüştürme operasyonları implicitly tür dönüştürmeyi de sağlayabilir.
+
+	Örtülü dönüşümler tehlikelidir.
+	En iyi tür dönüşümü hiç yapılmayan tür dönüşümüdür :D
+
+	Dönüşümlerin impilicit olmaması için başına explicit keywordu yazılmnası gerekiyor. (Modern C++)
+	explicit operator int() const;
+
+	Aksi halde bir neden oladığı sürece tür dönüştürme operasyonlarının explicit olması mantıklı.
+	Explicit keywordu sadece declarationda olması gerekiyor.
+
+	In logical expression casting from int and pointers to boolean is implicit.
+	Operator bool fonksiyonu olmadan classlar için aynı durum söz konusu değil.
+	O yüzden operator bool fonksiyonunun overload'ı önemli.
+	Unique_ptr, cin/cout , optional
+
+	unique_ptr için null olup olmadığını
+	cin için işlemin state'ini doğru halde olup olmadığını
+	optional için içinde veri taşıyıp taşımadığını
+
+	Modern C++la birlikte operator bool explicit yapıldığında tür dönüşümü implicitly yapılmazken
+	logical context'te tür dönüşümü hala implicit
+	O yüzden operator bool'u da explicit yapmak mantıklı
+
+Enum operator overloading:
+
+	Enum türleri için de global operator fonksiyonları yazılabilir.
+
+	Weekday implementasyonu

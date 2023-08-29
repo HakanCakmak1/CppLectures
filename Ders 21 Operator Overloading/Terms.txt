@@ -1,0 +1,2 @@
+Callable
+Functor Class/Function Object
