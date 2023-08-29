@@ -1,0 +1,45 @@
+﻿Ders 22: Static Members
+
+Static data members:
+	static int x;
+
+	Sınıfın nesnesine ait değil
+	Aslında bildiğimiz global değişken, dil katmanında sınıfa ait görünüyor
+
+	Sınıf nesnesinin hayatıyla alakası yok nesne olmadan hayata geliyorlar
+
+	class MyClass
+	{
+		static int x; 
+	};
+	Üstteki static int x; ifadesi definition değil sadece declaration(non-defining declaration)
+
+	Definition yoksa compiler'da değil linker kısmında hata verir.
+	Definitionda static keyword'u kullanılmamalı
+
+	Static data members zero initialize edilir
+
+	Static data members incomplete type olabilir
+	class OtherClass;
+	class MyClass
+	{
+		static OtherClass otherClass;
+	};
+
+	Aynı şekilde bir sınıfın kendi türünden statik veri elemanına sahip olması geçerlidir
+	class MyClass
+	{
+		static MyClass myClass;
+	};
+
+	class MyClass
+	{
+	public:
+		int mx;
+	};
+	MyClass m;
+	m.mx = 5; 
+
+	Üstteki atama geçerli
+
+	Statik veri elemanlarının initialization'ı main çağrılmadan önce yapılır.
