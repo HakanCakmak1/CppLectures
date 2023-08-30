@@ -43,3 +43,17 @@ Static data members:
 	Üstteki atama geçerli
 
 	Statik veri elemanlarının initialization'ı main çağrılmadan önce yapılır.
+
+	int MyClass::mx{};
+	şeklinde initialize edilmesi gerekiyor.
+
+	this->mx şeklinde erişim yapılabilir.
+
+	Ancak constuctor initializer list ile initialize edilemez.
+
+	Old C++ dahil const static ve tam türlerinden data memberları class definition içerisinde initalize edilebilir
+	(int, bool, enum)
+
+	Static initialization fiasco static data members için de geçerli
+
+	C++17 standardı ile global variables and static data members can be inline
