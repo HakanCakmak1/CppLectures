@@ -13,6 +13,5 @@ private:
 
 	Singleton() = default;
 	~Singleton() = default;
-	static Singleton singleton;
 };
 

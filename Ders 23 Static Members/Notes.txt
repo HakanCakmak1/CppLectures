@@ -1,0 +1,82 @@
+﻿Ders 23: Static Members
+
+Singleton devam:
+	Meyer's singleton'ında static variable function içinde define edilir
+	static Singleton& get_instance()
+	{
+		static Singleton instance;
+		return instance;
+	}
+
+--
+	Geri döndürülen nesne X value olarak kabul edilir. O yüzden assignment yapılırsa move eder
+	MyClass foo()
+	{
+		MyClass x;
+		return x;
+	}
+	MyClass m = foo();
+	Yukarıda move assignment çağrılır
+
+	Counter imlementasyonu
+
+	Container: belirli türden nesneleri bir arada tutmayı sağlayan yapılar
+	Java ve C#da genelde collection denir
+
+	Container örnekleri:
+	Sequence Containers:
+		std::string;
+		std::vector;
+		std::deque;
+		std::list;
+		std::forward_list; (C++11)
+		std::array; (C++11)
+
+	Associative Containers:
+		std::set
+		std::multiset
+		std::map
+		std::multimap
+
+	Unordered Associative Containers:
+		std::unordered_set
+		std::unordered_multiset
+		std::unordered_map
+		std::unordered_multimap
+
+	Hoca fighter implementasyonu yaptı ana mantık tüm fighterların birbirini...
+	bilebilmesi için ortak statik bir vektör class'ı tutmak
+
+Range-based for loop
+
+	int a[5] = {2, 4, 6, 8, 10};
+	for (int ival : a){}
+	şeklinde kullanılırsa kopyalama yapar
+	for (int& ival : a)
+	şeklinde yazılırsa reference
+	for (const int& ival : a)
+	şeklinde yazılırsa const reference 
+	for (auto ival : a){}
+	type deductiın ile de kullanılabilir
+
+if with initializer (C++17)
+
+	if (condition; expression)
+
+	Örnek
+	if (int ival = foo(); ival < 10);
+
+	Diğer bir C'de olmayan Eski C++'da olan bir if
+	if (int x = 10) 
+	Bu C++17'de şu şekilde de yazılabilir
+	if (int x = 10, x)
+
+Composition and Containment
+
+	Bir sınıfın diğer sınıfın elemanını içermesi
+	class B
+	{
+	private:
+		A a;
+	};
+	Burada a'ya member object denir

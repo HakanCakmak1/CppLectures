@@ -1,9 +1,8 @@
 #include "Singleton.h"
 
-Singleton Singleton::singleton{};
-
 Singleton& Singleton::getInstance()
 {
+	static Singleton singleton;
 	return singleton;
 }
 

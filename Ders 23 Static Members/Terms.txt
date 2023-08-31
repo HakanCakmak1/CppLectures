@@ -1,0 +1,4 @@
+﻿Container / Collection (Java, C#)
+Range-based for loop
+If with initializer (C++17)
+Member Object
