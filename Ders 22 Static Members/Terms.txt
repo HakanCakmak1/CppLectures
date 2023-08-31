@@ -1,1 +1,6 @@
-﻿non-defining declaration
+﻿Non-defining declaration
+Named Constructor idiom
+Pattern -> Dilden bağımsız
+Idiom -> Dile bağımlı
+Technic -> Daha kapsamlı dile bağımlı
+Singleton

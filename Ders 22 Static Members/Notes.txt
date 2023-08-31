@@ -57,3 +57,66 @@ Static data members:
 	Static initialization fiasco static data members için de geçerli
 
 	C++17 standardı ile global variables and static data members can be inline
+	Böylece h dosyası içerisinde initialize edilebilir
+	Constexpr data members are implicitly inline.
+
+Static Member Functions:
+
+	Static funclar aslında global function gibiler dil katmanında ayrılar
+	Dolayısıyla non-static data memberdaki gibi gizli bir class referansı yok
+
+	Global fonksiyonlardan en önemli farkları
+	1) private bölüme erişebilirler
+	2) isimleri class scope'da
+
+	class MyClass
+	{
+		public:
+		static void func();
+	}
+
+	m.func();
+	p->func();
+	şeklinde de çağrım yapabilir ama nesneye ait bir çağrım olmaz
+
+	Diğer fonksiyonlarda olduğu gibi non-static member functionlarda olduğu gibi..
+	declare edilip cpp içinde de define edilebilir ya da inline olarak define edilebilir
+
+	Global fonksiyonlarda static keywordu farklı, internal linkage ile alakalı olduğu anlamına geliyor
+
+	Static member functionlarda this keywordu geçersiz ve non-static data members'a erişim söz konusu değil
+
+	Static member functionlarda const geçersiz
+
+	Constant non-static member function'lar static data member'ları değiştirebilir.
+
+	Static veri elemanına verilen ilk değer class scopeda aranır.
+	int MyClass::x = foo();
+	İlk olarak foo fonksiyonu class scope içerisinde aranacak.
+
+	Static member functionlar private bölüme erişebilirler.
+	static void foo()
+	{
+		MyClass m;
+		m.func();
+	}
+	func private olsa bile erişim söz konusu
+
+	Static member function ile global functionların pointer'ı tanımlandığı gibi tutulabilir.
+	Non-static member functionlar için durum ayrı daha ileride görülecek.
+
+	Static functionlar ne için kullanılır.
+	1) Static data memberları döndürmek için.
+	2) Named Constructor idiom 
+		static Complex create_cartesian(double r, double i);
+		static Complex create_polar(double distance, double angle);
+
+Singleton:
+
+	Pattern -> Dilden bağımsız
+	Idiom -> Dile bağımlı
+	Technic -> Daha kapsamlı dile bağımlı
+
+	Singleton'a herkesin ulaşabiliyor olması lazım
+
+	Singleton implementasyonu
